@@ -21,10 +21,9 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		$this->context = 'woocommerce';
 
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'add_pending_referral' ), 10, 2 );
-		add_action( 'woocommerce_order_status_pending_to_processing', array( $this, 'add_pending_referral' ), 10 );
+		add_action( 'woocommerce_order_status_pending', array( $this, 'add_pending_referral' ), 10, 2 );
 
 		// There should be an option to choose which of these is used
-		add_action( 'woocommerce_payment_complete', array( $this, 'mark_referral_complete' ), 10 );
 		add_action( 'woocommerce_order_status_completed', array( $this, 'mark_referral_complete' ), 10 );
 		add_action( 'woocommerce_order_status_processing', array( $this, 'mark_referral_complete' ), 10 );
 		add_action( 'woocommerce_order_status_completed_to_refunded', array( $this, 'revoke_referral_on_refund' ), 10 );
@@ -55,7 +54,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 * @access  public
 	 * @since   1.0
 	*/
-	public function add_pending_referral( $order_id = 0, $posted = '' ) {
+	public function add_pending_referral( $order_id = 0, $posted ) {
 
 		$this->order = apply_filters( 'affwp_get_woocommerce_order', new WC_Order( $order_id ) );
 
