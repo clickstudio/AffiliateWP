@@ -526,14 +526,21 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 
 		$per_page = $this->get_items_per_page( 'affwp_edit_affiliates_per_page', $this->per_page );
 
-		$affiliates   = affiliate_wp()->affiliates->get_affiliates( array(
+		
+		$affiliate_args = apply_filters( 'admin_affiliates_query_args', 
+		array(
 			'number'  => $per_page,
 			'offset'  => $per_page * ( $page - 1 ),
 			'status'  => $status,
 			'search'  => $search,
 			'orderby' => sanitize_text_field( $orderby ),
 			'order'   => sanitize_text_field( $order )
-		) );
+		) 
+		);
+		
+		
+		
+		$affiliates   = affiliate_wp()->affiliates->get_affiliates( $affiliate_args );
 		return $affiliates;
 	}
 
