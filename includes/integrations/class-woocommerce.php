@@ -119,8 +119,9 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				if ( $product_total <= 0 && 'flat' !== affwp_get_affiliate_rate_type( $affiliate_id ) ) {
 					continue;
 				}
-
-				$amount += $this->calculate_referral_amount( $product_total, $order_id, $product['product_id'], $affiliate_id );
+				
+				$var_product_id = empty( $product->variation_id ) ? $product->id : $product->variation_id;
+				$amount += $this->calculate_referral_amount( $product_total, $order_id, $var_product_id, $affiliate_id );
 
 			}
 
@@ -214,12 +215,14 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			} else {
 				$amount = $product['line_total'];
 			}
-
+			
+			$var_product_id = empty( $product->variation_id ) ? $product->id : $product->variation_id;
+			
 			$products[] = array(
 				'name'            => $product['name'],
 				'id'              => $product['product_id'],
 				'price'           => $amount,
-				'referral_amount' => $this->calculate_referral_amount( $amount, $order_id, $product['product_id'] )
+				'referral_amount' => $this->calculate_referral_amount( $amount, $order_id, $var_product_id )
 			);
 
 		}
