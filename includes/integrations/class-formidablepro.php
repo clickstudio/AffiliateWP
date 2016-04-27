@@ -170,7 +170,9 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 
 			$referral_total = $this->calculate_referral_amount( $purchase_amount, $entry_id );
 
-			$this->insert_pending_referral( $referral_total, $entry_id, $description );
+			$this->insert_pending_referral( $referral_total, $entry_id, $description, 
+			array( array('name' => 'Formidable: '.$description, 'id' => $form_id, 'price' => $purchase_amount, 'referral_amount' => $referral_total ) ) 
+			);
 
 		}
 
