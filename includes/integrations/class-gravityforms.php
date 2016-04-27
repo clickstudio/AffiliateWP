@@ -82,7 +82,9 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 
 		$referral_total = $this->calculate_referral_amount( $total, $entry['id'] );
 
-		$this->insert_pending_referral( $referral_total, $entry['id'], $desc );
+		$this->insert_pending_referral( $referral_total, $entry['id'], $desc,
+		array( array('name' => 'Gravity Form: '.$form['title'], 'id' => $form['title'], 'price' => $total, 'referral_amount' => $referral_total ) ) 
+		);
 
 		if( empty( $total ) ) {
 			$this->mark_referral_complete( $entry, array() );
