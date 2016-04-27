@@ -75,9 +75,20 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 			$referral_total = $this->calculate_referral_amount( $txn->amount, $txn->id, $txn->product_id );
 
 			// insert a pending referral
-			$this->insert_pending_referral( $referral_total, $txn->id, get_the_title( $txn->product_id ), array(), $txn->subscription_id );
+			$this->insert_pending_referral( $referral_total, $txn->id, get_the_title( $txn->product_id ), $this->get_products($txn, $referral_total), $txn->subscription_id );
 
 		}
+	}
+	
+	/**
+	* Adds products data to the referral so total can be captured
+	*
+	* @access  public
+	**/
+	public function get_products($txn, $referral_total) {
+		
+		return array( array('name' => get_the_title( $txn->product_id ), 'id' => $txn->id, 'price' => $txn->amount, 'referral_amount' => $referral_total ) );
+		
 	}
 
 	/**
