@@ -220,7 +220,7 @@ abstract class Affiliate_WP_Base {
 			// This referral has already been paid so it cannot be rejected
 			return false;
 		}
-
+		if ( affwp_set_referral_status( $referral->referral_id, 'rejected' ) ) {
 		if ( affiliate_wp()->referrals->update( $referral->referral_id, array( 'status' => 'rejected' ), '', 'referral' ) ) {
 
 			if( $this->debug ) {
