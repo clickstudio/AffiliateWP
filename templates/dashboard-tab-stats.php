@@ -1,7 +1,8 @@
+<h4><?php _e( 'Statistics', 'affiliate-wp' ); ?></h4>
+
+<?php if( apply_filters( 'affwp-affiliate-dashboard-referral-counts', TRUE ) ) : ?>
+
 <div id="affwp-affiliate-dashboard-referral-counts" class="affwp-tab-content">
-
-	<h4><?php _e( 'Statistics', 'affiliate-wp' ); ?></h4>
-
 	<table class="affwp-table">
 		<thead>
 			<tr>
@@ -22,9 +23,13 @@
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_counts', affwp_get_affiliate_id() ); ?>
-
 </div>
+
+<?php endif; ?>
+
+<?php do_action( 'affwp_affiliate_dashboard_after_counts', affwp_get_affiliate_id() ); ?>
+
+<?php if( apply_filters( 'affwp-affiliate-dashboard-earnings-stats', TRUE ) ) : ?>
 
 <div id="affwp-affiliate-dashboard-earnings-stats" class="affwp-tab-content">
 	<table class="affwp-table">
@@ -45,9 +50,13 @@
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_earnings', affwp_get_affiliate_id() ); ?>
-
 </div>
+
+<?php endif; ?>
+
+<?php do_action( 'affwp_affiliate_dashboard_after_earnings', affwp_get_affiliate_id() ); ?>
+
+<?php if( apply_filters( 'affwp-affiliate-dashboard-campaign-stats', TRUE ) ) : ?>
 
 <div id="affwp-affiliate-dashboard-campaign-stats" class="affwp-tab-content">
 	<table class="affwp-table">
@@ -80,6 +89,8 @@
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_campaign_stats', affwp_get_affiliate_id() ); ?>
-
 </div>
+
+<?php endif; ?>
+
+<?php do_action( 'affwp_affiliate_dashboard_after_campaign_stats', affwp_get_affiliate_id() ); ?>
