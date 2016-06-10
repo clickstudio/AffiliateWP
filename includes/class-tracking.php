@@ -291,17 +291,23 @@ class Affiliate_WP_Tracking {
 
 			$amount = $amount > 0 ? affwp_calc_referral_amount( $amount, $affiliate_id ) : 0;
 
-			// Store the visit in the DB
-			$referral_id = affiliate_wp()->referrals->add( array(
-				'affiliate_id' => $affiliate_id,
-				'amount'       => $amount,
-				'status'       => 'pending',
-				'description'  => sanitize_text_field( $_POST['description'] ),
-				'context'      => sanitize_text_field( $_POST['context'] ),
-				'campaign'     => sanitize_text_field( $_POST['campaign'] ),
-				'reference'    => sanitize_text_field( $_POST['reference'] ),
-				'visit_id'     => $this->get_visit_id()
-			) );
+			$amount 		= $amount > 0 ? affwp_calc_referral_amount( $amount, $affiliate_id ) : 0;
+			$description  	= sanitize_text_field( $_POST['description'] );
+			$context      	= sanitize_text_field( $_POST['context'] );
+			$campaign     	= sanitize_text_field( $_POST['campaign'] );
+			$reference    	= sanitize_text_field( $_POST['reference'] );
+
+			// Create a new referral
+			$referral_id = affiliate_wp()->referrals->add( apply_filters( 'affwp_insert_pending_referral', array(
+					'affiliate_id' => $affiliate_id,
+					'amount'       => $amount,
+					'status'       => 'pending',
+					'description'  => $description,
+					'context'      => $context,
+					'campaign'     => $campaign,
+					'reference'    => $reference,
+					'visit_id'     => $this->get_visit_id()
+				), $amount, $reference, $description, $affiliate_id, $this->get_visit_id(), array(), $context ) );
 
 			if( $this->debug ) {
 				$this->log( sprintf( 'Referral created for visit #%d.', $this->get_visit_id() ) );
