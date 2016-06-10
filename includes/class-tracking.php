@@ -289,9 +289,7 @@ class Affiliate_WP_Tracking {
 				die( '-5' ); // Ignore a zero amount referral
 			}
 
-			$amount = $amount > 0 ? affwp_calc_referral_amount( $amount, $affiliate_id ) : 0;
-
-			$amount 		= $amount > 0 ? affwp_calc_referral_amount( $amount, $affiliate_id ) : 0;
+			$amount 	= $amount > 0 ? affwp_calc_referral_amount( $amount, $affiliate_id ) : 0;
 			$description  	= sanitize_text_field( $_POST['description'] );
 			$context      	= sanitize_text_field( $_POST['context'] );
 			$campaign     	= sanitize_text_field( $_POST['campaign'] );
