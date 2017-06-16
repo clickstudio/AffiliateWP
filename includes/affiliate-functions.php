@@ -581,8 +581,7 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 
 		delete_user_meta( $affiliate->user_id, 'affwp_referral_notifications' );
 		delete_user_meta( $affiliate->user_id, 'affwp_promotion_method' );
-		
-		do_action( 'affwp_affiliate_delete_data', $affiliate );
+
 	}
 
 	$deleted = affiliate_wp()->affiliates->delete( $affiliate_id, 'affiliate' );
@@ -594,8 +593,9 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 		 *
 		 * @param int  $affiliate_id The affiliate ID.
 		 * @param bool $delete_data  Whether the user data was also flagged for deletion.
+		 * @param AffWP\Affiliate
 		 */
-		do_action( 'affwp_affiliate_deleted', $affiliate_id, $delete_data );
+		do_action( 'affwp_affiliate_deleted', $affiliate_id, $delete_data, $affiliate );
 
 	}
 
