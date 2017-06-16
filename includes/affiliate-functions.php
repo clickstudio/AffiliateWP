@@ -593,7 +593,7 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 		 *
 		 * @param int  $affiliate_id The affiliate ID.
 		 * @param bool $delete_data  Whether the user data was also flagged for deletion.
-		 * @param AffWP\Affiliate $affiliate Affiliate object
+		 * @param AffWP\Affiliate $affiliate Affiliate object.
 		 */
 		do_action( 'affwp_affiliate_deleted', $affiliate_id, $delete_data, $affiliate );
 
