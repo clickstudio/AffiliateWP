@@ -999,10 +999,11 @@ class Affiliate_WP_Settings {
 		else
 			$value = isset( $args['std'] ) ? $args['std'] : '';
 
-		$disabled = $this->is_setting_disabled( $args ) ? 'readonly' : '';
+		// Must use a 'readonly' attribute over disabled to ensure the value is passed in $_POST.
+		$readonly = $this->is_setting_disabled( $args ) ? __checked_selected_helper( $args['disabled'], true, false, 'readonly' ) : '';
 		
 		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"' . $disabled . '/>';
+		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" ' . $readonly . '/>';
 		$html .= '<p class="description">'  . $args['desc'] . '</p>';
 
 		echo $html;
