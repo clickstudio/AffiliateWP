@@ -596,6 +596,8 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					'description' => __( 'This will prevent orders of this product from generating referral commissions for affiliates.', 'affiliate-wp' ),
 					'cbvalue'     => 1
 				) );
+		
+				do_action( 'affwp_product_settings_'.$this->context );
 
 				wp_nonce_field( 'affwp_woo_product_nonce', 'affwp_woo_product_nonce' );
 ?>
@@ -644,6 +646,8 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					<input type="checkbox" class="checkbox" name="_affwp_woocommerce_variation_referrals_disabled[<?php echo $variation->ID; ?>]" id="_affwp_woocommerce_variation_referrals_disabled[<?php echo $variation->ID; ?>]" <?php checked( $disabled, true ); ?> /> <?php _e( 'Disable referrals for this product variation', 'affiliate-wp' ); ?>
 				</label>
 			</p>
+			
+			<?php do_action( 'affwp_product_variation_settings_'.$this->context ); ?>
 
 		</div>
 
