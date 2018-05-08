@@ -597,7 +597,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					'cbvalue'     => 1
 				) );
 		
-				do_action( 'affwp_product_settings_'.$this->context );
+				do_action( affwp_' . $this->context . '_product_settings' );
 
 				wp_nonce_field( 'affwp_woo_product_nonce', 'affwp_woo_product_nonce' );
 ?>
@@ -647,7 +647,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				</label>
 			</p>
 			
-			<?php do_action( 'affwp_product_variation_settings_'.$this->context ); ?>
+			<?php do_action( affwp_' . $this->context . '_variation_settings' ); ?>
 
 		</div>
 
